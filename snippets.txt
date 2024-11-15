@@ -1,0 +1,11 @@
+Home
+
+$title = "Momento"
+$keywords = "Share your moments with momento"
+$description = "Share your moments with momento"
+
+
+$title = "Signup + Momento"
+$keywords = "Share your moments with momento"
+
+$title = "Login + Momento"
