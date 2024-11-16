@@ -16,7 +16,7 @@
     <meta name="keywords" content="<?= $keywords; ?>">
     <meta name="description" content="<?= $description; ?>">
     <meta name="author" content="stynne">>
-    <link rel="shortcut icon" href="public/assets/images/logo">
-    <link rel="stylesheet" href="public/css/register.css">
+    <link rel="shortcut icon" href="<?php url_for('public/assets/images/logo/logo.png') ?>">
+    <link rel="stylesheet" href="<?= url_for('public/css/master.css');?>">
 </head>
 <body>

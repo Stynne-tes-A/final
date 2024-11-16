@@ -1,0 +1,23 @@
+RewriteEngine On
+
+# Only apply rules if the requested file or directory does not exist
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Automatically add .php extension
+RewriteRule ^([a-zA-Z0-9_]+)$ $1.php [QSA,NC,L]
+
+# Profile rewrites
+RewriteRule ^profile/([a-zA-Z0-9_.@\-]+)$ profile.php?username=$1 [QSA,NC,L]
+RewriteRule ^profile/$ profile.php [QSA,NC,L]
+
+# Custom 404 error page
+ErrorDocument 404 /Momento/404.php
+
+# Deny access to .htaccess file
+<FilesMatch "\.htaccess">
+    Require all denied
+</FilesMatch>
+
+# Disable directory listing
+IndexIgnore *

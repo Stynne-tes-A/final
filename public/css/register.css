@@ -156,3 +156,16 @@ form .button:hover{
     margin-top: 1rem;
     font-size: 15px;
 }
+.form_errors{
+    font-size: 15px;
+    color: #c68183;
+
+}
+.form_errors li{
+    list-style: none;
+    width: 560px;
+    padding: 1rem;
+    font-size: 15px;
+    color: #c68183;
+
+}

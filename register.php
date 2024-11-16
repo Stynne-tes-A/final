@@ -1,10 +1,6 @@
 <?php
 require_once "core/init.php";
-if(Input::exists('')){
-    echo "form submitted";
-}
-$title = "Register + Momento";
-$keywords = "Share your moments with momento";
+require_once "shared/register_handler.php";
 require "shared/header.php";
 ?>
     <section class="pageContainer">
@@ -13,9 +9,14 @@ require "shared/header.php";
             <div class="col-1">
             </div>
             <article class="col-2">
+                <?php
+                if(!empty($form_errors)){
+                    echo show_errors($form_errors);
+                }
+                ?>
                 <form action="<?= h($_SERVER['PHP_SELF']); ?>" method="POST" class="form">
                     <div class="siteLogoContainer">
-                        <img src="public/assets/images/logo" alt="Momento">
+                        <img src="public/assets/images/logo/logo.png" alt="Momento">
                     </div>
                     <input type="email" placeholder="Email" class="form--input" name="email" autocomplete="off" value="<?= escape(Input::get('email')); ?>">
                     <input type="text" placeholder="Full Name" class="form--input" name="full_name" autocomplete="off" value="<?= escape(Input::get('full_name'));?>">
@@ -31,7 +32,7 @@ require "shared/header.php";
                     <span class="terms">By signing up you agree to our <a href="#">Terms & Conditions</a></span>
                 </form>
                 <footer class="form--footer">
-                    <span> Have an account? <a href="login.php">Login</a></span>
+                    <span> Have an account? <a href="login">Login</a></span>
                 </footer>
             </article>
         </main>

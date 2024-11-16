@@ -1,8 +1,6 @@
 <?php
 require_once "core/init.php";
-
-$title = "Login + Momento";
-$keywords = "Share your moments with momento";
+require_once "shared/login_handler.php";
 require "shared/header.php";
 ?>
     <section class="pageContainer">
@@ -11,11 +9,16 @@ require "shared/header.php";
             <div class="col-1">
             </div>
             <article class="col-2">
-                <form action="<?= h($_SERVER['PHP_SELF']); ?>"  method="POST" class="form">
+            <?php
+                if(!empty($form_errors)){
+                    echo show_errors($form_errors);
+                }
+                ?>
+                <form  action="<?= h($_SERVER['PHP_SELF']); ?>" method="POST" class="form">
                     <div class="siteLogoContainer">
-                        <img src="public/assets/images/logo" alt="Momento">
+                        <img src="public/assets/images/logo/logo.png" alt="Momento">
                     </div>
-                    <input type="text" placeholder="Email or Username" class="form--input" name="email_username">
+                    <input type="text" placeholder="Email or Username" class="form--input" name="email_username" value="<?= escape(Input::get('email_username'));?>">
                     <div class="passwordContainer">
                     <input type="password" placeholder="password" class="form--input" name="password" id=
                     "password">
@@ -26,7 +29,7 @@ require "shared/header.php";
                     <a href="#" class="password_reset">Forgot Password></a>
                 </form>
                 <footer class="form--footer">
-                    <span>Don't have an account? <a href="register.php">sign up</a></span>
+                    <span>Don't have an account? <a href="register">sign up</a></span>
                 </footer>
             </article>
         </main>
