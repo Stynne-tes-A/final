@@ -31,14 +31,14 @@ body{
     position:relative;
     min-width: 46rem;
     height: 61.8rem;
-    background:url(../assets/images/favicon/home-phone.png) center no-repeat;
+    background:url(public/assets/images/favicon/home-phone.png)      no-repeat;
     background-size:100% 100%;
 
 }
 .col-1 .heroImg{
     width: 55%;
     height: 53rem;
-    background:url(../assets/images/favicon/4.png) center no-repeat;
+    background:url(public\assets\images\favicon\4.png)  no-repeat;
     background-size:100% 100%;
     position: absolute;
     top: 2.5rem;

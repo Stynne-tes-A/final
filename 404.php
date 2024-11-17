@@ -1,10 +1,10 @@
 <?php
 require_once "core/init.php";
+require "shared/header.php";
 
 $title = "Page not found + Momento";
 $keywords = "error,404,document was mot found,share your moments with momento";
 
-require "shared/header.php";
 
 ?>
 <header class="error--header">
@@ -15,7 +15,7 @@ require "shared/header.php";
             </a>
         </div>
         <div class="error--header-right">
-            <?php if(loggedIn()){
+            <?php if (loggedIn()) {
                 ?>
                 <a href="<?php echo url_for('profile'); ?>" class="profile_button">
                     Profile Page
@@ -24,7 +24,7 @@ require "shared/header.php";
                     try Going to Home page
                 </a>
                 <?php
-            }else{
+            } else {
                 ?>
                 <a href="<?php echo url_for('login'); ?>" class="error--link">
                     Login
@@ -32,8 +32,8 @@ require "shared/header.php";
                 <a href="<?php echo url_for('register'); ?>" class="error--link">
                     Register
                 </a>
-                <?php } ?>
-            
+            <?php } ?>
+
         </div>
     </div>
 
@@ -43,7 +43,8 @@ require "shared/header.php";
 <div class="error--container">
     <div class="error-content">
         <h1>Sorry this page isn't available</h1>
-        <p>the page maybe you followed maybe broken,or the page may have been removed <a href="<?php echo url_for('index'); ?>">Go back to momento</a></p>
-        <img src="<?php echo url_for('public/assets/images/logo/404.jpg');?>" alt="404">
+        <p>the page maybe you followed maybe broken,or the page may have been removed <a
+                href="<?php echo url_for('index'); ?>">Go back to momento</a></p>
+        <img src="<?php echo url_for('public/assets/images/logo/404.jpg'); ?>" alt="404">
     </div>
 </div>

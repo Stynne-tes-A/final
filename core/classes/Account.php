@@ -1,15 +1,18 @@
 <?php
 
-class Account {
+class Account
+{
     private $errors = array();
     private $passed = false;
     private $pdo;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->pdo = Database::connect();
     }
 
-    public function register_user($username, $fullName, $email, $password) {
+    public function register_user($username, $fullName, $email, $password)
+    {
         $encryptedPassword = $this->hash_password($password);
         $ip = $this->getIP();
         $os = $this->getOS();
@@ -31,38 +34,41 @@ class Account {
 
         return $this->pdo->lastInsertId(); // Fixed method name
     }
-    public function login_user($email_username, $password) {
-       if(!empty($email_username) && !empty($password)) {
-        $stmt=$this->pdo->prepare(("SELECT * FROM users WHERE email = :username OR username = :username"));
-        $stmt->bindParam(":username", $email_username, PDO::PARAM_STR);
-        $stmt->execute();
-        $row=$stmt->fetch(PDO::FETCH_OBJ);
-        if($stmt -> rowCount() !=0){
-            if(password_verify($password,$row->password)){
-                if (empty($this->errors)) {
-                    $this->passed = true;
-                    return $row->user_id;
+    public function login_user($email_username, $password)
+    {
+        if (!empty($email_username) && !empty($password)) {
+            $stmt = $this->pdo->prepare(("SELECT * FROM users WHERE email = :username OR username = :username"));
+            $stmt->bindParam(":username", $email_username, PDO::PARAM_STR);
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_OBJ);
+            if ($stmt->rowCount() != 0) {
+                if (password_verify($password, $row->password)) {
+                    if (empty($this->errors)) {
+                        $this->passed = true;
+                        return $row->user_id;
 
+                    }
+                } else {
+                    $this->addError("USername and password incorrect");
+                    return false;
                 }
-            }else{
+            } else {
                 $this->addError("USername and password incorrect");
                 return false;
-            }
-        }else{
-            $this->addError("USername and password incorrect");
-            return false;
 
+            }
         }
-       }
-       
-        
+
+
     }
 
-    public function hash_password($password) {
+    public function hash_password($password)
+    {
         return password_hash($password, PASSWORD_DEFAULT);
     }
 
-    public function getOS() {
+    public function getOS()
+    {
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
         $os_platform = "Unknown OS Platform";
         $os_array = array(
@@ -88,7 +94,8 @@ class Account {
         return $os_platform;
     }
 
-    public function getBrowser() {
+    public function getBrowser()
+    {
         $user_agent = $_SERVER['HTTP_USER_AGENT'];
         $browser = "Unknown Browser";
         $browser_array = array(
@@ -111,7 +118,8 @@ class Account {
         return $browser;
     }
 
-    public function getIP() {
+    public function getIP()
+    {
         if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
             $ip_add = $_SERVER['HTTP_CLIENT_IP'];
         } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -122,7 +130,8 @@ class Account {
         return $ip_add;
     }
 
-    public function check($source, $items = array()) {
+    public function check($source, $items = array())
+    {
         foreach ($items as $item => $rules) {
             foreach ($rules as $rule => $rule_value) {
                 $value = escape($source[$item]);
@@ -150,7 +159,8 @@ class Account {
         }
     }
 
-    private function userExists($item, $value) {
+    private function userExists($item, $value)
+    {
         $allowedColumns = ['username', 'email']; // Whitelisted columns
         if (!in_array($item, $allowedColumns)) {
             throw new Exception("Invalid column name.");
@@ -161,15 +171,18 @@ class Account {
         return $stmt->rowCount() > 0;
     }
 
-    public function addError($error) {
+    public function addError($error)
+    {
         $this->errors[] = $error;
     }
 
-    public function errors() {
+    public function errors()
+    {
         return $this->errors;
     }
 
-    public function passed() {
+    public function passed()
+    {
         return $this->passed;
     }
 }

@@ -12,7 +12,7 @@ RewriteRule ^profile/([a-zA-Z0-9_.@\-]+)$ profile.php?username=$1 [QSA,NC,L]
 RewriteRule ^profile/$ profile.php [QSA,NC,L]
 
 # Custom 404 error page
-ErrorDocument 404 /Momento/404.php
+ErrorDocument 404 /presentation/404.php
 
 # Deny access to .htaccess file
 <FilesMatch "\.htaccess">
